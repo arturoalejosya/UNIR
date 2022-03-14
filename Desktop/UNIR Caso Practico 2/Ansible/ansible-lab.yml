@@ -1,0 +1,32 @@
+---
+- hosts: webserver
+  become: true
+  user: ansible
+  tasks:
+    - name: Instalar cliente ftp que se llama lftp
+      dnf:
+        name: lftp
+        state: latest
+  
+    - name: Instalar apache
+      dnf:
+        name: httpd
+        state: latest
+  
+    - name: Copiar index.html a la ruta /var/www/html
+      copy:
+        content: genera archivo en mi host {{ ansible_hostname }}
+        dest: /var/www/html/index.html
+  
+    - name: Subir servicio de httpd
+      systemd:
+        name: httpd
+        state: started
+        enable: yes
+        
+    - name: Abir puerto httpd
+      firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+        immediate: yes

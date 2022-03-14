@@ -1,0 +1,30 @@
+[webserver]
+kubenode1.acme.es ansible_user=ansible
+
+[master]
+kubemaster.acme.es ansible_user=ansible
+
+[workers]
+kubenode1.acme.es  ansible_user=ansible
+kubenode2.acme.es  ansible_user=ansible
+
+[worker1]
+kubenode1.acme.es  ansible_user=ansible
+
+[worker2]
+kubenode2.acme.es  ansible_user=ansible
+
+[nfs]
+nfs.acme.es         ansible_user=ansible
+
+[todos]
+kubemaster.acme.es  ansible_user=ansible
+kubenode1.acme.es   ansible_user=ansible
+kubenode2.acme.es   ansible_user=ansible
+nfs.acme.es         ansible_user=ansible
+
+[webserver]
+192.168.1.111       ansible_user=ansible
+
+[padre:children]
+todos
